@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from starlette.responses import HTMLResponse 
+from starlette.responses import HTMLResponse
 from config.database import engine, Base
 from middlewares.error_handler import ErrorHandler
 from routers.producto import producto_router

@@ -8,7 +8,7 @@ from schemas.producto import Producto
 
 producto_router = APIRouter()
 
-@producto_router.get('/productos', tags=['productos'], response_model=List[Producto], status_code=200, dependencies=[Depends(JWTBearer())])
+@producto_router.get('/productos', tags=['productos'], response_model=List[Producto], status_code=200)
 def get_productos() -> List[Producto]:
     db = Session()
     try:
@@ -17,7 +17,7 @@ def get_productos() -> List[Producto]:
         db.close()
     return result
 
-@producto_router.get('/productos/{id}', tags=['productos'], response_model=Producto, dependencies=[Depends(JWTBearer())])
+@producto_router.get('/productos/{id}', tags=['productos'], response_model=Producto)
 def get_producto(id: int = Path(..., ge=1, le=2000)) -> Producto:
     db = Session()
     try:
@@ -28,7 +28,7 @@ def get_producto(id: int = Path(..., ge=1, le=2000)) -> Producto:
         db.close()
     return result
 
-@producto_router.get('/productos/', tags=['productos'], response_model=List[Producto], dependencies=[Depends(JWTBearer())])
+@producto_router.get('/productos/', tags=['productos'], response_model=List[Producto])
 def get_productos_by_category(category: str = Query(..., min_length=4, max_length=20)) -> List[Producto]:
     db = Session()
     try:
